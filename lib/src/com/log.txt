@@ -1,0 +1,13 @@
+2015/4/15:
+创建：com.qinxiaoyu.module.fifo.FifoItem 
+修改：com.qinxiaoyu.lib.format.map.LibLinkedHashMap.java
+	添加isHaveKey方法
+修改：com.qinxiaoyu.lib.module.datapool.DataPool;
+
+2015/4/14:
+com.qinxiaoyu.module.fifo.Fifo 创建
+
+
+2015/4/27
+修改：com.qinxiaoyu.android.broadcastPool.BroadcastPool.java
+创建：com.qinxiaoyu.android.LibBundle.java
