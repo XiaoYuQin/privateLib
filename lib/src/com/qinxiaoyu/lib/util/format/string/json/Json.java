@@ -36,6 +36,33 @@ public class Json {
 		Gson reGson = new Gson();
 		return reGson.fromJson(json, obj.getClass());
 	}
+	
+	/**
+	 * 将一个json字符串转换为一个实体类
+	 * @author    	秦晓宇
+	 * @date      	2016年4月13日 下午5:22:45 
+	 * @param c		
+	 * 				-将要转换的 Class 类型
+	 * @param json	
+	 * 				-将要转换的json字符串
+	 * @return 		转换成功输出实体类，转换失败、返回null
+	 */
+	public static Object toObject(Class c ,String json)
+	{
+		try
+		{
+			Gson reGson = new Gson();
+			reGson.fromJson(json, c);
+			return reGson;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
     /**
      * 把类转换为json格式数据，有@Expose注解的会被序列化。
      * 使用的是Gson的GsonBuilder方式来进程序列化；
@@ -53,6 +80,30 @@ public class Json {
 		//.setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)		//会把字段首字母大写,注:对于实体上使用了@SerializedName注解的不会生效.  
 		.setPrettyPrinting() 											//对json结果格式化.  
 		.setVersion(1.0)    											//有的字段不是一开始就有的,会随着版本的升级添加进来,那么在进行序列化和返序列化的时候就会根据版本号来选择是否要序列化.  
+																		//@Since(版本号)能完美地实现这个功能.还的字段可能,随着版本的升级而删除,那么  
+																		//@Until(版本号)也能实现这个功能,GsonBuilder.setVersion(double)方法需要调用.  
+		.create();  
+		String str = gson.toJson(object);
+		return str;
+	}
+	
+	
+	/**
+	 * 转换为带格式化输出的Json字符串
+	 * @author    秦晓宇
+	 * @date      2016年4月13日 下午5:01:55 
+	 * @param object
+	 * @return
+	 */
+	public static String toJsonByPretty(Object object)
+	{
+		Gson gson = new GsonBuilder()  
+		//.excludeFieldsWithoutExposeAnnotation() 						//不导出实体中没有用@Expose注解的属性  
+		.enableComplexMapKeySerialization() 							//支持Map的key为复杂对象的形式  
+		.serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss:SSS")		//时间转化为特定格式    
+		//.setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)		//会把字段首字母大写,注:对于实体上使用了@SerializedName注解的不会生效.  
+		.setPrettyPrinting() 											//对json结果格式化.  
+		//.setVersion(1.0)    											//有的字段不是一开始就有的,会随着版本的升级添加进来,那么在进行序列化和返序列化的时候就会根据版本号来选择是否要序列化.  
 																		//@Since(版本号)能完美地实现这个功能.还的字段可能,随着版本的升级而删除,那么  
 																		//@Until(版本号)也能实现这个功能,GsonBuilder.setVersion(double)方法需要调用.  
 		.create();  

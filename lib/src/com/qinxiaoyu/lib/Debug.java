@@ -1,11 +1,11 @@
 package com.qinxiaoyu.lib;
 
-import android.util.Log;
+//import android.util.Log;
 
 public class Debug {
 	
-	public static void debugx(String tag,String msg){Log.i(tag,msg);}
-//	public static void debugx(String tag,String msg){System.out.println(tag+" : "+msg);}
+//	public static void debugx(String tag,String msg){Log.i(tag,msg);}
+	public static void debugx(String tag,String msg){System.out.println(tag+" : "+msg);}
 	
 
 

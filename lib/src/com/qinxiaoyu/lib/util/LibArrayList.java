@@ -2,7 +2,7 @@ package com.qinxiaoyu.lib.util;
 
 import java.util.ArrayList;
 
-import com.qinxiaoyu.lib.format.string.json.bohua.BHProtocol;
+import com.qinxiaoyu.lib.util.format.string.json.bohua.BHProtocol;
 
 public class LibArrayList {
 
