@@ -9,7 +9,7 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
 import com.qinxiaoyu.lib.Debug;
-import com.qinxiaoyu.lib.util.file.LibFile;
+import com.qinxiaoyu.lib.util.file.File;
 
 public class Conever {
 
@@ -17,7 +17,7 @@ public class Conever {
 	
 	public static BohuaDeviceType Conever()
 	{
-		String text = LibFile.read("/sdcard/1.txt",LibFile.CodeType.GB2312);
+		String text = File.read("/sdcard/1.txt",File.CodeType.GB2312);
 		debug(text);
 		BohuaDeviceType deviceType = new BohuaDeviceType();
          try 

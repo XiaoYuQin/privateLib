@@ -1,12 +1,12 @@
 package com.qinxiaoyu.lib.module.plugin;
 
-import com.qinxiaoyu.lib.util.file.LibFile;
+import com.qinxiaoyu.lib.util.file.File;
 
 public class PlugInConfigFileReslover {
 
 	public static boolean reslove(String filePath)
 	{
-		String file = LibFile.read(filePath, LibFile.CodeType.GB2312);
+		String file = File.read(filePath, File.CodeType.GB2312);
 		
 		
 		

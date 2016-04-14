@@ -4,7 +4,9 @@ package com.qinxiaoyu.lib;
 
 public class Debug {
 	
-//	public static void debugx(String tag,String msg){Log.i(tag,msg);}
+
+
+	//	public static void debugx(String tag,String msg){Log.i(tag,msg);}
 	public static void debugx(String tag,String msg){System.out.println(tag+" : "+msg);}
 	
 
@@ -24,6 +26,9 @@ public class Debug {
 	public static final boolean debugModuleFifo 				= true;
 	/*util 目录下的debug控制*/
 	public static final boolean debugFileFile = true;
+	public static final boolean DateDebug = true;
 	
 	public static final boolean debugBundleHandler = false;
+	public static final boolean debugFile = true;
+	
 }
