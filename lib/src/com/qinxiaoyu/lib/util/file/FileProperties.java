@@ -40,20 +40,35 @@ public class FileProperties {
     public void writeProperties(String filePath,String parameterName, String parameterValue)
     {
     	Properties prop = new Properties();  
+    	InputStream fis = null;
+    	OutputStream fos = null;
         try {  
-            InputStream fis = new FileInputStream(filePath);  
+            fis = new FileInputStream(filePath);  
             //从输入流中读取属性列表（键和元素对）  
             prop.load(fis);  
             //调用 Hashtable 的方法 put。使用 getProperty 方法提供并行性。  
             //强制要求为属性的键和值使用字符串。返回值是 Hashtable 调用 put 的结果。  
-            OutputStream fos = new FileOutputStream(filePath);  
+            fos = new FileOutputStream(filePath);  
             prop.put(parameterName, parameterValue);  
             //以适合使用 load 方法加载到 Properties 表中的格式，  
             //将此 Properties 表中的属性列表（键和元素对）写入输出流  
             prop.store(fos, " Update '" + parameterName + "' value");  
            
+            fos.close();
+            fis.close();
         }  
         catch (IOException e) {  
+            
+            try {
+            	if(fos != null)
+            		fos.close();
+            	if(fis != null)
+            		fis.close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+            e.printStackTrace();
 //	        	Print.print("ConfigInfoError","Visit "+filePath+" for updating "+parameterName+" value error");  
             System.err.println("**********************");  
             System.err.println("\r\n write BalanceStat configuration failed,please check "+filePath+" is writer . thank you \n\n");  

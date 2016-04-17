@@ -124,27 +124,30 @@ public class Ip {
     	}
     	return ret;
     }
+    
     /**
      * 判断输入的实体类是否是一个在规定范围内的端口
-     * 创建时间：2015/3/18
-     * @author :秦晓宇
-     * @param : port 端口号
-     * @return boolean: 检验结果，是一个port的格式则返回true，不是一个port的格式则返回false
-     * */
-    public static boolean verifyPort(Object port)
+     * @author    秦晓宇
+     * @date      2016年4月18日 上午1:35:31 
+     * @param port
+     * 			- port 端口号
+     * @return
+     * 			- 检验结果，是一个port的格式则返回true，不是一个port的格式则返回false
+     */
+    public static boolean verifyPort(String port)
     {
-    	if(!(port instanceof Integer))
-    	{
-    		return false;
-    	}
-    	else
-    	{
+    	try {
     		int portInt = Integer.parseInt(port.toString());
     		if((portInt >0)&&(portInt<65535))
     			return true;
     		else
     			return false;
-    	}
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+    		
+
     }
 	
 }
