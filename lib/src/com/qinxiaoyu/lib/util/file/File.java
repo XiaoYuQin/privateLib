@@ -96,7 +96,7 @@ public class File extends java.io.File{
 	 * @param string
 	 * 			- 文件内容
 	 * @param type
-	 * 			- type为true时写入文件末尾，type为负时写入文件起始
+	 * 			- type为true时写入文件末尾，type为false时清除原文件内容，重新写入
 	 * @return
 	 */
 	public static boolean write(String filePath, String string, boolean type)
@@ -169,6 +169,7 @@ public class File extends java.io.File{
 	 */
 	public static String read(String filePath)
 	{
+		if(filePath == null) return null;
 		String ret = null;
 		
 		File file = new File(filePath);
@@ -225,6 +226,7 @@ public class File extends java.io.File{
 	 */
 	public static String read(String filePath,CodeType codeType)
 	{
+		if(filePath == null) return null;
 		String FileContent = null;
 		String codeTypeTemp = "";
 		switch(codeType)
@@ -234,6 +236,9 @@ public class File extends java.io.File{
 				break;
 			case GB2312:
 				codeTypeTemp = "GB2312";
+				break;
+			default:
+				codeTypeTemp = "UTF-8";
 				break;
 		}
 	    try { 
