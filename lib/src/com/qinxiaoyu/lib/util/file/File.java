@@ -9,11 +9,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.DecimalFormat;
+import java.util.regex.Pattern;
 
 import com.qinxiaoyu.lib.Debug;
 
 public class File extends java.io.File{
 	
+	/***/
+	private static final long serialVersionUID = 1L;
 	public File(String path) {
 		super(path);
 		// TODO Auto-generated constructor stub
@@ -109,55 +112,113 @@ public class File extends java.io.File{
 		boolean ret = false;
 		debug(filePath);
 
-		FileWriter fw = null;
-		BufferedWriter bw = null;
-		
-		try
+		//判断文件是否存在
+		File file = new File(filePath);
+		//文件不存在，根据路径创建文件夹和文件后写文件
+		if(!file.exists())
 		{
-			File file = new File(filePath);
-	    	if(!file.exists())
-			{ 
-				try 
-				{
-					file.createNewFile();
-				} 
-				catch (IOException e) 
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			if(creatFileByPath(filePath) == true)
+			{
+				ret = writeStringToFile(filePath, string, type);
 			}
-			
-
-			
-			fw = new FileWriter(filePath,type);	// 创建FileWriter对象，用来写入字符流  
-			bw = new BufferedWriter(fw); // 将缓冲对文件的输出  
-			bw.write(string + "\n"); // 写入文件  
-			bw.newLine();  
-            bw.flush(); // 刷新该流的缓冲  
-            bw.close();  
-            fw.close();  
-            debug("写文件成功");
-            ret = true;
-			
-		} catch (IOException e) 
+			else
+			{
+				ret = false;
+			}
+		}
+		//文件存在,直接写文件
+		else 
 		{
-			ret = false;
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			try
-			{  
-				bw.close();  
-	            fw.close();  
-	        } 
-			catch (IOException e1) 
-	        {  
-                // TODO Auto-generated catch block  
-	        }  
+			ret = writeStringToFile(filePath,string,type);
 		}
 		return ret;
 	}
 
+
+	/**
+	 * 向一个文本中写入内容
+	 * @author    秦晓宇
+	 * @date      2016年4月18日 上午10:37:36 
+	 * @param filePath
+	 * @param string
+	 * @param type
+	 * @return
+	 */
+	private static boolean writeStringToFile(String filePath, String string, boolean type)
+	{
+		boolean ret = false;
+		FileWriter fw = null;
+		BufferedWriter bw = null;
+		try 
+		{
+			fw = new FileWriter(filePath,type);
+			bw = new BufferedWriter(fw); // 将缓冲对文件的输出  
+			bw.write(string + "\n"); // 写入文件  
+			bw.newLine();  
+	        bw.flush(); // 刷新该流的缓冲  
+	        bw.close();  
+	        fw.close();  
+	        debug("写文件成功");    
+	        ret = true;
+		} 
+		catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ret = false;
+		}	// 创建FileWriter对象，用来写入字符流  
+    
+        return ret;
+	}
+	/**
+	 * 根据路径创建文件
+	 * @author    秦晓宇
+	 * @date      2016年4月18日 上午10:38:05 
+	 * @param path
+	 * 			- 文件路径 如："d:/offlineMap/config/MapPointsConfig.json"
+	 * @return
+	 */
+	public static boolean creatFileByPath(String path)
+	{
+		boolean ret = false;
+		Pattern pattern = Pattern.compile("/");
+		String[] strs = pattern.split(path);
+		String pathString = "";
+		debug(""+strs.length);
+		for (int i=0;i<strs.length;i++) 
+		{
+		    System.out.println(strs[i]);
+		    pathString += strs[i];		    
+		    debug("pathString = "+i+"  "+ pathString);
+		    File file = new File(pathString);
+		    if(!file.exists())
+		    {
+		    	debug(pathString+"不存在");
+		    	if(i!=strs.length-1)
+		    	{
+		    		file.mkdir();
+		    	}
+		    	else 
+		    	{
+		    		try {
+						file.createNewFile();
+						ret = true;
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						ret = false;
+					}
+				}
+		    }
+		    else 
+		    {
+		    	debug(pathString+"存在");
+			}
+		    pathString += "/";
+		} 
+		return ret;
+	}
+	
 	/**
 	 * 读文件
 	 * @author    秦晓宇
