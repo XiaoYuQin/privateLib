@@ -12,7 +12,7 @@ import com.qinxiaoyu.lib.Debug;
  * 
  * 
  * */
-public abstract class Fifo {
+public class Fifo {
 	
 	private void debug(String str)
 	{
@@ -159,18 +159,16 @@ public abstract class Fifo {
 		 }
 		 return true;
 	 }
-	 /*获取数据集中的数据,若数据条目小于*/
+
 	 /**
-	  * 方法或类的用途及使用的算法名称
-	  * 创建时间：UTC时间
-	  * 修改时间：UTC时间及修改说明，包括修改人。
-	  * @author :秦晓宇
-	  * @param : 
-	  * 		field1： 参数1及其说明
-	  * 		field2： 参数2及其说明
-	  * @return : 返回值及其说明
-	  **/
-	 public Object read()
+	 * 读取Fifo的一条数据<hr>
+	 * @author    秦晓宇
+	 * @date      2016年4月22日 下午2:55:46 
+	 * @return
+	 * 			- 有值时返回实体类<br>
+	 * 			- 无值时返回nll
+	 */
+	public Object read()
 	 {
 		 if(this.data.size()>0)
 		 {

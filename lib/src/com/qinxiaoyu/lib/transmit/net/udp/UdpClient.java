@@ -23,16 +23,17 @@ public class UdpClient {
         socket.send(packet); 
         socket.close();
 	}
-    /**
-     * 通过udp将一串数据发送至指定ip地址的指定端口
-     * 创建时间：2015/2/27
-     * 修改时间：2015/3/18 
-     * 		1.将抛出的异常放置在了程序内部解决，不向上抛出。
-     * 		2.添加了发送出去或未发送出去的返回标志
-     * @author :秦晓宇
-     * @param : ip 对方的ip地址，port对方的接收端口，data发送的数据
-     * @return boolean: 发送成功则返回true，发送数百返回false。
-     * */
+	/**
+	 * 通过udp将一串数据发送至指定ip地址的指定端口<hr>
+	 * @author    秦晓宇
+	 * @date      2015年2月27日 
+	 * @param ip 	-发送方的ip地址
+	 * @param port	-对方的接收端口
+	 * @param data	-发送的数据
+	 * @return
+	 * 			-发送成功则返回true<br>
+	 * 			-发送失败返回false。
+	 */
 	public static boolean send(String ip,int port,String data) // throws Exception
 	{
 		DatagramSocket socket;
